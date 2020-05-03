@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Helmet} from 'react-helmet';
-import DayPicker, { DateUtils } from 'react-day-picker';
+import DayPicker, {DateUtils} from 'react-day-picker';
 import 'react-day-picker/lib/style.css';
 
 export default class Calendar extends Component {
@@ -12,19 +12,14 @@ export default class Calendar extends Component {
         super(props);
         this.handleDayClick = this.handleDayClick.bind(this);
         this.handleResetClick = this.handleResetClick.bind(this);
-        this.state = this.getInitialState();
     }
 
-    getInitialState() {
-        return {
-            from: undefined,
-            to: undefined,
-        };
-    }
+
 
     handleDayClick(day) {
-        const range = DateUtils.addDayToRange(day, this.state);
-        this.setState(range);
+        const range = DateUtils.addDayToRange(day, this.props);
+        this.props.onChange(range)
+        console.log(range);
     }
 
     handleResetClick() {
@@ -32,8 +27,8 @@ export default class Calendar extends Component {
     }
 
     render() {
-        const { from, to } = this.state;
-        const modifiers = { start: from, end: to };
+        const {from, to} = this.props;
+        const modifiers = {start: from, end: to};
         return (
             <div className="RangeExample">
                 <p>
@@ -52,7 +47,7 @@ export default class Calendar extends Component {
                 <DayPicker
                     className="Selectable"
                     numberOfMonths={this.props.numberOfMonths}
-                    selectedDays={[from, { from, to }]}
+                    selectedDays={[from, {from, to}]}
                     modifiers={modifiers}
                     onDayClick={this.handleDayClick}
                 />

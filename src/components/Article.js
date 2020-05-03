@@ -25,6 +25,7 @@ export default class Article extends Component {
         return (
             <div>
                 <section>{article.text}</section>
+                <section>{article.date}</section>
                 <CommentsList comments={article.comments}/>
             </div>
         )

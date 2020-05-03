@@ -6,13 +6,19 @@ import Accordeon from "../decorators/Accordeon";
 class ArticleList extends Component {
 
     render() {
-        const {articles, openItemId, toggleOpenItem} = this.props
-        const articleElements = articles.map(
+        const {articles, openItemId, toggleOpenItem, from, to} = this.props
+        const articleFiltered = !from || !to ? articles : articles.filter((article) => {
+            const currentArticleDate = new Date(article.date);
+            const a = from < currentArticleDate;
+            const b = currentArticleDate < to;
+            return a && b;
+        })
+        const articleElements = articleFiltered.map(
             (article) => <li key={article.id}>
                 <Article
                     article={article}
-                    isOpen = {article.id === openItemId}
-                    toggleOpen = {toggleOpenItem(article.id)}
+                    isOpen={article.id === openItemId}
+                    toggleOpen={toggleOpenItem(article.id)}
                 />
             </li>
         )
@@ -25,4 +31,6 @@ class ArticleList extends Component {
     }
 
 }
+
 export default Accordeon(ArticleList);
+
