@@ -1,6 +1,8 @@
 import React, {Component} from 'react'
 import ArticleList from "./ArticleList";
 import Select from "react-select"
+import 'react-day-picker/lib/style.css';
+import Calendar from "./dayPicker";
 
 export default class App extends Component {
 
@@ -15,6 +17,7 @@ export default class App extends Component {
         }))
         return (
             <div>
+                <Calendar/>
                 <Select options={options} value={this.state.selection} onChange={this.changeSelection} isMulti={true}/>
                 <ArticleList articles={this.props.articles}/>
             </div>

@@ -1,5 +1,6 @@
 import React, {Component} from "react";
 import toggleOpen from "../decorators/toggleOpen";
+import AddComment from "./AddComment";
 
 class CommentsList extends Component {
     static defaultProps = {
@@ -25,6 +26,7 @@ class CommentsList extends Component {
     }
 
     getComment() {
+
         const {isOpen} = this.props;
         if (!isOpen) return null;
         else {
@@ -38,10 +40,21 @@ class CommentsList extends Component {
                     </div>
                 )
             );
-            return comment
+            return <div>
+                <AddComment/>
+                {comment}
+            </div>
         }
     }
 
+    addComment() {
+
+        return <div>
+            <input type={'text'} value={'Ваше имя'}/>
+            <button>Добавить новый комментарий</button>
+        </div>
+    }
 
 }
+
 export default toggleOpen(CommentsList);

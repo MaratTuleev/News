@@ -1,8 +1,9 @@
 import React, {Component} from "react";
 import CommentsList from "./CommentsList";
-import toggleOpen from "../decorators/toggleOpen";
+import {CSSTransition} from 'react-transition-group';
+import '../css/styles.css'
 
-class Article extends Component {
+export default class Article extends Component {
 
     render() {
         const {article, isOpen, toggleOpen} = this.props;
@@ -30,4 +31,3 @@ class Article extends Component {
     }
 
 }
-export default Article
