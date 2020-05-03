@@ -2,8 +2,10 @@ import React, {Component} from 'react';
 import {Helmet} from 'react-helmet';
 import DayPicker, {DateUtils} from 'react-day-picker';
 import 'react-day-picker/lib/style.css';
+import { connect } from 'react-redux';
+import {setFromTo} from '../actions/index'
 
-export default class Calendar extends Component {
+export class Calendar extends Component {
     static defaultProps = {
         numberOfMonths: 2,
     };
@@ -74,3 +76,16 @@ export default class Calendar extends Component {
         );
     }
 }
+
+
+
+const mapStateToProps = (state) => ({
+    from: state.datePicker.from,
+    to: state.datePicker.to
+})
+
+const mapDispatchToProps = (dispatch) => ({
+    onChange: (range) => dispatch(setFromTo(range))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Calendar)
