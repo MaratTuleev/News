@@ -28,17 +28,19 @@ class ArticleList extends Component {
 
 }
 
+const selectFilter = (articles, selected) => {
+    return selected.length === 0 ? articles : articles.filter(article => selected.some(select => select.value === article.id))
+}
 const dateFilter = (articles, from, to) => {
-    const articleFiltered = !from || !to ? articles : articles.filter((article) => {
+    return !from || !to ? articles : articles.filter((article) => {
         const currentArticleDate = new Date(article.date);
         const a = from < currentArticleDate;
         const b = currentArticleDate < to;
         return a && b;
     })
-    return articleFiltered
 }
-const mapStateToProps = ({articles, datePicker: { from, to}}) => ({
-    articles: dateFilter(articles, from, to)
+const mapStateToProps = ({articles, datePicker: {from, to}, selections}) => ({
+    articles: selectFilter(dateFilter(articles, from, to), selections)
 })
 
 export default connect(mapStateToProps)(Accordeon(ArticleList))

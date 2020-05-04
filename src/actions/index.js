@@ -6,9 +6,8 @@ export const resetDate = (state) => ({
     type: 'RESET_DATE',
     payload: state
 })
-// export const setArticles = (articles) => ({
-//     type: 'SET_ARTICLES',
-//     payload: articles
-// })
-
+export const setSelections = (selected) => ({
+    type: 'SELECTIONS',
+    payload: {selected}
+})
 
