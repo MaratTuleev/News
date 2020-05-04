@@ -21,7 +21,7 @@ export default class App extends Component {
             <div>
                 <Calendar/>
                 <Select options={options} value={this.state.selection} onChange={this.changeSelection} isMulti={true}/>
-                <ArticleList from={this.state.from} to={this.state.to}/>
+                <ArticleList/>
             </div>
         );
     }

@@ -2,10 +2,11 @@ import React, {Component} from 'react';
 import {Helmet} from 'react-helmet';
 import DayPicker, {DateUtils} from 'react-day-picker';
 import 'react-day-picker/lib/style.css';
-import { connect } from 'react-redux';
+import {connect} from 'react-redux';
 import {setFromTo} from '../actions/index'
+import {resetDate} from "../actions/index";
 
-export class Calendar extends Component {
+class Calendar extends Component {
     static defaultProps = {
         numberOfMonths: 2,
     };
@@ -13,19 +14,12 @@ export class Calendar extends Component {
     constructor(props) {
         super(props);
         this.handleDayClick = this.handleDayClick.bind(this);
-        this.handleResetClick = this.handleResetClick.bind(this);
     }
-
 
 
     handleDayClick(day) {
         const range = DateUtils.addDayToRange(day, this.props);
         this.props.onChange(range)
-        console.log(range);
-    }
-
-    handleResetClick() {
-        this.setState(this.getInitialState());
     }
 
     render() {
@@ -41,7 +35,7 @@ export class Calendar extends Component {
                     `Selected from ${from.toLocaleDateString()} to
                 ${to.toLocaleDateString()}`}{' '}
                     {from && to && (
-                        <button className="link" onClick={this.handleResetClick}>
+                        <button className="link" onClick={() => this.props.resetDate()}>
                             Reset
                         </button>
                     )}
@@ -78,14 +72,14 @@ export class Calendar extends Component {
 }
 
 
-
 const mapStateToProps = (state) => ({
     from: state.datePicker.from,
     to: state.datePicker.to
 })
 
 const mapDispatchToProps = (dispatch) => ({
-    onChange: (range) => dispatch(setFromTo(range))
+    onChange: (range) => dispatch(setFromTo(range)),
+    resetDate: () => dispatch(resetDate({from: undefined, to: undefined}))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Calendar)
