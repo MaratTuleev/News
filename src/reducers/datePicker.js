@@ -3,7 +3,7 @@ const datePicker = (state = {}, action) => {
         case 'SET_FROM_TO':
             return action.payload
         case 'RESET_DATE':
-            return action.payload
+            return action.payloadej
         default:
             return state
     }

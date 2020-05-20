@@ -9,7 +9,7 @@ export default class Article extends Component {
         const {article, isOpen, toggleOpen} = this.props;
         return (
             <div>
-                <h3>{article.title}</h3>
+                <h3>{article.title}!!!</h3>
                 <button onClick={toggleOpen}>
                     {isOpen ? 'close' : 'open'}
                 </button>
